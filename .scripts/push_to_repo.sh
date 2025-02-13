@@ -1,10 +1,8 @@
 #!/bin/bash
 
-echo "User: $GIT_USER" 
-echo "Email: $GIT_USER_EMAIL"
 # Setup the user
-git config --global user.email "$GIT_USER_EMAIL"
-git config --global user.name "$GIT_USER"
+git config --global user.email "github-actions[bot]"
+git config --global user.name "github-actions[bot]@users.noreply.github.com"
 
 # Setup remote repository
 git remote set-url origin "https://x-access-token:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git"
