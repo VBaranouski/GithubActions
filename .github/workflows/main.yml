@@ -3,24 +3,22 @@ name: Deploy Pipeline
 on:
   push:
     branches:
-      - main
+      - dev
 
 jobs:
   push_to_repo:
     runs-on: ubuntu-latest
-    env:
-        WORK_DIR: "/tmp/Repo"
-    
+    # env:
+    #    WORK_DIR: "/tmp/Repo"  
     steps:
-      - name: Create working directory
-        run: mkdir -p "${{ env.WORK_DIR }}" && cd "${{ env.WORK_DIR }}"
-        
+    #  - name: Create working directory
+    #    run: mkdir -p "${{ env.WORK_DIR }}" && cd "${{ env.WORK_DIR }}"     
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Call script for push to "${{ github.repository }}"
-        env: 
-          REPO_DIR: "${{ env.WORK_DIR }}/GithubActions" 
+     #   env: 
+     #     REPO_DIR: "${{ env.WORK_DIR }}/GithubActions" 
         run: | 
             chmod +x .scripts/push_to_repo.sh
             .scripts/push_to_repo.sh
