@@ -3,7 +3,7 @@ name: Deploy Pipeline
 on:
   push:
     branches:
-      - main
+      - dev
 
 jobs:
   push_to_repo:
