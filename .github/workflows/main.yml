@@ -6,6 +6,18 @@ on:
    branches:
    - main
 
+jobs:
+  create_repo:
+    name: create_repo
+    runs-on: ubuntu-latest
+    steps:
+    - name: Print a greeting
+      env:
+        MY_NAME: Vlad
+      run: |
+        echo "Hello $MY_NAME"
+    
+  
    
  
 
