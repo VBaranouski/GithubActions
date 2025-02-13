@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  pull_and_push_to_repo:
+  Pull_And_Push:
     runs-on: ubuntu-latest 
     steps:  
       - name: Checkout repository
