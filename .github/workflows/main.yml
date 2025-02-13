@@ -17,15 +17,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set execute permissions
-        run: chmod +x .scripts/push_to_repo.sh
-
-      - name: Call script
+      - name: Call script for push
         env: 
           GIT_USER: "vlad_bars"
           GIT_USER_EMAIL: "vlad_bars@gmails.com"
           REPO_DIR: "${{ env.WORK_DIR }}/GithubActions"        
-        run: .scripts/push_to_repo.sh
+        run: | 
+            chmod +x .scripts/push_to_repo.sh
+            .scripts/push_to_repo.sh
          
    
  
