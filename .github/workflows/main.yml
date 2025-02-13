@@ -1,35 +1,31 @@
+name: Deploy Pipeline
+
 on:
- push:
-   branches:
-   - main
- pull_request:
-   branches:
-   - main
+  push:
+    branches:
+      - main
 
 jobs:
-  create_repo:
-    name: create_repo
-    runs-on: ubuntu-latest
-    steps:
-    - name: Print a greeting
-      env:
-        MY_NAME: Vlad
-      run: |
-        echo "Hello $MY_NAME"
-    
-
   push_to_repo:
-     name: push
-     runs-on: ubuntu-latest
-     steps:
-       - name: call script
-         env: 
-           WORK_DIR: "/tmp/Repo"
-           REPO_URL: "git@github.com:VBaranouski/GithubActions.git"
-           GIT_USER: "vlad_bars"
-           GIT_USER_EMAIL: "vlad_bars@gmails.com"
-           REPO_DIR: "$WORK_DIR/GithubActions"        
-         run: .scripts/push_to_repo.sh
+    runs-on: ubuntu-latest
+    env:
+        WORK_DIR: "/tmp/Repo"
+    
+    steps:
+      - name: make work dir
+        run: mkdir -p "${{ env.WORK_DIR }}" && cd "${{ env.WORK_DIR }}"
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set execute permissions
+        run: chmod +x .scripts/push_to_repo.sh
+
+      - name: Call script
+        env: 
+          GIT_USER: "vlad_bars"
+          GIT_USER_EMAIL: "vlad_bars@gmails.com"
+          REPO_DIR: "${{ env.WORK_DIR }}/GithubActions"        
+        run: .scripts/push_to_repo.sh
          
    
  
