@@ -1,9 +1,6 @@
 name: git_checkout_and_push_tmpl
 
-on:
-  push:
-    branches:
-      - main
+on: workflow_call
 
 jobs:
   Pull_And_Push:
