@@ -3,7 +3,7 @@ name: Deploy Pipeline
 on:
   push:
     branches:
-      - dev
+      - main
 
 jobs:
   push_to_repo:
@@ -12,8 +12,9 @@ jobs:
         WORK_DIR: "/tmp/Repo"
     
     steps:
-      - name: make work dir
+      - name: Create working directory
         run: mkdir -p "${{ env.WORK_DIR }}" && cd "${{ env.WORK_DIR }}"
+        
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -22,7 +23,7 @@ jobs:
           GIT_USER: "vlad_bars"
           GIT_USER_EMAIL: "vlad_bars@gmails.com"
           REPO_DIR: "${{ env.WORK_DIR }}/GithubActions" 
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GIT_NAME: ${{ github.repository }}
         run: | 
             chmod +x .scripts/push_to_repo.sh
