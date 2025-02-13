@@ -22,7 +22,8 @@ jobs:
           GIT_USER: "vlad_bars"
           GIT_USER_EMAIL: "vlad_bars@gmails.com"
           REPO_DIR: "${{ env.WORK_DIR }}/GithubActions" 
-          GIT_REPO: "git@github.com:${{ github.repository }}.git"
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          GIT_NAME: ${{ github.repository }}
         run: | 
             chmod +x .scripts/push_to_repo.sh
             .scripts/push_to_repo.sh
