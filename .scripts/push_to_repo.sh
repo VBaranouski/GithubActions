@@ -1,10 +1,18 @@
 #!/bin/bash
 
-# Commit & push to REPO
+# Open repository dir
 cd "$REPO_DIR"
-git config --global user.email "$secrets.GIT_USER_EMAIL"
-git config --global user.name "$secrets.GIT_USER"
-git remote set-url origin https://x-access-token:"$secrets.GITHUB_TOKEN"@github.com/"$github.repository".git
+
+# Setup the user
+git config --global user.email "$GIT_USER_EMAIL"
+git config --global user.name "$GIT_USER"
+
+# Setup remote repository
+git remote set-url origin "https://x-access-token:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git"
+
+# Commit changes
 git add -A
-git commit -m "Update " || echo "No changes to commit"
+git commit -m "Automated commit" || echo "No changes to commit"
+
+# Push to origin
 git push origin main
