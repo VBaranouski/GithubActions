@@ -25,11 +25,11 @@ jobs:
        - name: call script
          env: 
            WORK_DIR: "/tmp/Repo"
-           REPO_URL: "https://$GIT_TOKEN@github.com/VBaranouski/DevopsPath.git"
+           REPO_URL: "git@github.com:VBaranouski/GithubActions.git"
            GIT_USER: "vlad_bars"
            GIT_USER_EMAIL: "vlad_bars@gmails.com"
-           REPO_DIR: "$WORK_DIR/DevopsPath"        
-         run: bash ./scritps/push_to_repo.sh
+           REPO_DIR: "$WORK_DIR/GithubActions"        
+         run: bash ./scripts/push_to_repo.sh
          
    
  
