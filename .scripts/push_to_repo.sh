@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Open repository dir
-#cd "$REPO_DIR"
-
 # Setup the user
 git config --global user.email "$GIT_USER_EMAIL"
 git config --global user.name "$GIT_USER"
