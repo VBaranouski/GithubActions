@@ -3,7 +3,7 @@ name: Deploy Pipeline
 on:
   push:
     branches:
-      - main
+      - dev
 
 jobs:
   push_to_repo:
@@ -21,8 +21,6 @@ jobs:
       - name: Call script for push to "${{ github.repository }}"
         env: 
           REPO_DIR: "${{ env.WORK_DIR }}/GithubActions" 
-       #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-       #   GIT_NAME: ${{ github.repository }}
         run: | 
             chmod +x .scripts/push_to_repo.sh
             .scripts/push_to_repo.sh
