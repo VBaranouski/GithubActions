@@ -15,7 +15,6 @@ jobs:
       - name: Call script for push to "${{ github.repository }}"
         run: | 
             chmod +x .scripts/push_to_repo.sh
-            echo "${{ vars.GIT_USER }}"
             .scripts/push_to_repo.sh
          
    
