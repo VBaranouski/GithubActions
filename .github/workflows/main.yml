@@ -17,7 +17,20 @@ jobs:
       run: |
         echo "Hello $MY_NAME"
     
-  
+
+  push_to_repo:
+     name: push
+     runs-on: ubuntu-latest
+     steps:
+       - name: call script
+         env: 
+           WORK_DIR: "/tmp/Repo"
+           REPO_URL: "https://$GIT_TOKEN@github.com/VBaranouski/DevopsPath.git"
+           GIT_USER: "vlad_bars"
+           GIT_USER_EMAIL: "vlad_bars@gmails.com"
+           REPO_DIR: "$WORK_DIR/DevopsPath"        
+         run: bash ./scritps/push_to_repo.sh
+         
    
  
 
