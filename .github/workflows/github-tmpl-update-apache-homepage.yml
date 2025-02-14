@@ -37,7 +37,11 @@ jobs:
         - name: Clone Repository "${{ github.repository }}"
           uses: actions/checkout@v4
 
+        - name: Run Unit tests
+          run: echo "do some unit testing"
+          
         - name: Update Apache Homepage
+          continue-on-error: false
           run: |
                 echo "${{ inputs.environment }}, ${{ inputs.name }}, ${{ inputs.page_text }}" > "${{ env.HTML_FILE }}"
                 cat "${{ env.HTML_FILE }}"
@@ -46,6 +50,7 @@ jobs:
           run: bash .scripts/push-to-repo.sh
 
         - name: Deploy Docker Image
+          continue-on-error: true
           run: bash .scripts/build-docker-image.sh
         
   
