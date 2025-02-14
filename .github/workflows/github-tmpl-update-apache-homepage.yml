@@ -39,8 +39,8 @@ jobs:
 
         - name: Update Apache Homepage
           run: |
-                echo "${{ inputs.environment }}, ${{ inputs.name }}, ${{ inputs.page_text }}" > "{{ $HTML_FILE }}"
-                cat "${{ HTML_FILE }}"
+                echo "${{ inputs.environment }}, ${{ inputs.name }}, ${{ inputs.page_text }}" > "${{ env.HTML_FILE }}"
+                cat "${{ env.HTML_FILE }}"
 
         - name: Call Script For Pushing To "${{ github.repository }}"
           run: bash .scripts/push_to_repo.sh
