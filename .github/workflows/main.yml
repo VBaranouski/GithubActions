@@ -19,7 +19,7 @@ jobs:
               touch test.txt
               
       - name: push to repo
-        uses: ./.github/workflows/git_checkout_and_push_tmpl.yml
+        run: bash .scripts/push_to_repo.sh
    
  
 
