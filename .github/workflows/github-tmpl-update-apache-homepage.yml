@@ -8,9 +8,9 @@ name: Reusable workflow - Update Apache Homepage
 on: 
   workflow_call:
     inputs: 
-      environment:
-        type: string
-        required: true
+    #  environment:
+    #    type: string
+    #   required: true
       name: 
         type: string
         required: true
@@ -20,12 +20,12 @@ on:
 
   workflow_dispatch: 
     inputs:
-      evn:
+      environment:
         type: choice
         options: 
-          - dev
-          - stg
-          - prd
+          - development
+          - staging
+          - prod
 
 jobs:
   validate_inputs:
