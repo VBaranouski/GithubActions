@@ -12,7 +12,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
               
-      - name: push to repo
+      - name: push to "${{ github.repository }}" repo
         run: bash .scripts/push_to_repo.sh
    
  
