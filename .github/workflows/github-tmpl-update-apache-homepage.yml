@@ -33,6 +33,7 @@ jobs:
 
   create_homepage: 
     runs-on: ubuntu-latest
+    needs: validate_inputs
     env:
       HTML_FILE: "ApacheHomepage.html"
     steps:
