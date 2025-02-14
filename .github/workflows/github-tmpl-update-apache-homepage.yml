@@ -18,6 +18,8 @@ on:
         type: string
         required: true
 
+  workflow_dispatch: 
+
 jobs:
   validate_inputs:
     runs-on: ubuntu-latest
