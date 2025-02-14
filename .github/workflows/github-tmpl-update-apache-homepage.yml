@@ -43,9 +43,9 @@ jobs:
                 cat "${{ env.HTML_FILE }}"
 
         - name: Call Script For Pushing To "${{ github.repository }}"
-          run: bash .scripts/push_to_repo.sh
+          run: bash .scripts/push-to-repo.sh
 
         - name: Deploy Docker Image
-          run: bash .scripts/build_docker_image.sh
+          run: bash .scripts/build-docker-image.sh
         
   
