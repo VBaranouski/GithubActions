@@ -10,13 +10,10 @@ on:
     inputs: 
       environment:
         type: string
-     #  required: true
       name: 
         type: string
-        required: true
       page_text: 
         type: string
-        required: true
 
   workflow_dispatch: 
     inputs:
@@ -26,6 +23,13 @@ on:
           - development
           - staging
           - prod
+      name:
+        type: string
+        default: Vlad
+      page_text: 
+        type: string
+        default: Привет из шаблона пайплайна
+        
 
 jobs:
   validate_inputs:
