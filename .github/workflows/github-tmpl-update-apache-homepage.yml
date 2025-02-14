@@ -1,12 +1,51 @@
 name: Reusable workflow - Update Apache Homepage
 # This workflow runs the update of Apache Homepage based on env, name and page_text variables
-# This workflow requeires the following secrets:
-# - GITHUB TOKEN
 # This workflow requeires the following variables:
-# - ENV: DEV, STG, PRD
-# - NAME - name of author
-# - PAGE_TEXT - plain text
+# - environment: development, stage, prod
+# - name - name of author
+# - page_text - plain text
 
-on: workflow_cal
+on: 
+  workflow_call:
+    inputs: 
+      environment:
+        type: string
+        required: true
+      name: 
+        type: string
+        required: true
+      page_text: 
+        type: string
+        required: true
 
+jobs:
+  validate_inputs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate Inputs
+        run: |
+          if [[ -z "${{ inputs.environment }}" || -z "${{ inputs.name }}" || -z "${{ inputs.page_text }}" ]]; then
+            echo " ERROR: One or more required inputs are empty!"
+            exit 1
+          fi
+
+  prapare_homepage: 
+    runs-on: ubuntu-latest
+    env:
+      HTML_FILE: "ApacheHomepage.html"
+    steps:
+        - name: Clone Repository "${{ github.repository }}"
+          uses: actions/checkout@4
+
+        - name: Update Apache Homepage
+          run: |
+                echo "${{ inputs.environment }}, ${{ inputs.name }}, ${{ inputs.page_text }}" > "{{ $HTML_FILE }}"
+                cat "${{ HTML_FILE }}"
+
+        - name: Call Script For Pushing To "${{ github.repository }}"
+          run: bash .scripts/push_to_repo.sh
+
+        - name: Deploy Docker Image
+          run: bash .scripts/build_docker_image.sh
+        
   
