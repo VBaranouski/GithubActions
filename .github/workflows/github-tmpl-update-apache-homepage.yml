@@ -42,10 +42,10 @@ jobs:
             exit 1
           fi
           if [[ -z "${{ inputs.name }}" ]]; then
-            ${{ inputs.name }}="Default_Name_auto"
+            $inputs.name="Default_Name_auto"
           fi
           if [[ -z "${{ inputs.page_text }}" ]]; then
-            ${{ inputs.page_text }}="Default_Page_Text_auto"
+            $inputs.page_text="Default_Page_Text_auto"
           fi
 
   create_homepage: 
