@@ -11,12 +11,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: make test folder
-        run: | 
-              mkdir Test 
-              cd Test
-              touch test.txt
               
       - name: push to repo
         run: bash .scripts/push_to_repo.sh
