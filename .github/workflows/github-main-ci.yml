@@ -1,0 +1,15 @@
+name: Main
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  Update-Homepage:
+    uses: .github/workflows/github-tmpl-update-apache-homepage.yml@main
+    with:
+      environment: development
+      name: Vlad_Bars
+      page_text: Test github actions
+        
