@@ -35,7 +35,7 @@ jobs:
       HTML_FILE: "ApacheHomepage.html"
     steps:
         - name: Clone Repository "${{ github.repository }}"
-          uses: actions/checkout@4
+          uses: actions/checkout@v4
 
         - name: Update Apache Homepage
           run: |
