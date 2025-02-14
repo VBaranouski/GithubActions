@@ -23,4 +23,4 @@ docker build -t "$DOCKER_IMAGE" .
 # Run the docker container
 docker run -d --name "$DOCKER_CONTAINER" -p $PORT_NUMBER:80 "$DOCKER_IMAGE"
 docker ps -q --filter "name=$DOCKER_CONTAINER" | grep -q . && echo "Container is up and running on PORT: "$PORT_NUMBER" "
-
+curl localhost:$PORT_NUMBER
