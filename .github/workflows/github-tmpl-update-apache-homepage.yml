@@ -37,9 +37,15 @@ jobs:
     steps:
       - name: Validate Inputs
         run: |
-          if [[ -z "${{ inputs.environment }}" || -z "${{ inputs.name }}" || -z "${{ inputs.page_text }}" ]]; then
-            echo " ERROR: One or more required inputs are empty!"
+          if [[ -z "${{ inputs.environment }}" ]]; then
+            echo " ERROR: Environment is not defined"
             exit 1
+          fi
+          if [[ -z "${{ inputs.name }}" ]]; then
+            ${{ inputs.name }}="Default_Name_auto"
+          fi
+          if [[ -z "${{ inputs.page_text }}" ]]; then
+            ${{ inputs.page_text }}="Default_PageText_auto"
           fi
 
   create_homepage: 
