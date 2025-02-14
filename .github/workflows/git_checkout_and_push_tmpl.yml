@@ -6,8 +6,8 @@ jobs:
   Pull_And_Push:
     runs-on: ubuntu-latest 
     steps:  
-      - name: Checkout repository
-        uses: actions/checkout@v4
+     # - name: Checkout repository
+     #   uses: actions/checkout@v4
 
       - name: Call script for push to "${{ github.repository }}"
         run: | 
