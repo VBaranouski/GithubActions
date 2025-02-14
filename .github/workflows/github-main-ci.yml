@@ -13,5 +13,5 @@ jobs:
     with:
       environment: development
       name: vasya
-      page_text: Hello from reusable workflow
+      page_text: ""
         
