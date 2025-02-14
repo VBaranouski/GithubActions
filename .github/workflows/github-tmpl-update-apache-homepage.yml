@@ -10,7 +10,7 @@ on:
     inputs: 
       environment:
         type: string
-       required: true
+     #  required: true
       name: 
         type: string
         required: true
