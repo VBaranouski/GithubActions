@@ -7,7 +7,7 @@ name: Reusable workflow - Update Apache Homepage
 
 on: 
   workflow_call:
-    inputs: 
+    inputs:            # Variables For Automatic Run
       environment:
         type: string
       name: 
@@ -16,8 +16,8 @@ on:
         type: string
 
   workflow_dispatch: 
-    inputs:
-      environment:
+    inputs:            # Variables For Manual Run
+      environment:     
         type: choice
         options: 
           - development
@@ -35,15 +35,22 @@ jobs:
   validate_inputs:
     runs-on: ubuntu-latest
     steps:
-      - name: Validate Inputs
+      - name: Validate Environment Variable
         run: |
-          if [[ -z "${{ inputs.environment }}" ]]; then
-            echo " ERROR: Environment is not defined"
-            exit 1
-          fi
-          if [[ -z "${{ inputs.name }}" ]]; then
-            $inputs.name="Default_Name_auto"
-          fi
+             if [[ -z "${{ inputs.environment }}" ]]; then
+               echo " ERROR: Environment is not defined"
+               exit 1
+             fi
+
+# вот тут надо подумать....
+      - name: Validate Name Variable
+        run: |
+             if [[ -z "${{ inputs.name }}" ]]; then
+                NAME="Default_Name_auto"
+             fi
+ # вот тут надо подумать....     
+      - name: Validate Page Text Variable
+        run: |
           if [[ -z "${{ inputs.page_text }}" ]]; then
             $inputs.page_text="Default_Page_Text_auto"
           fi
