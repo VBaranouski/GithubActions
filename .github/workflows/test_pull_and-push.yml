@@ -3,7 +3,7 @@ name: pull_and_push_to_repo
 on:
   push:
     branches:
-      - main
+      - dev
 
 jobs:
  Clone_And_Push:
