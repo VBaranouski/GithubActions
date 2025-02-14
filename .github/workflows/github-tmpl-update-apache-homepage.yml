@@ -1,0 +1,12 @@
+name: Reusable workflow - Update Apache Homepage
+# This workflow runs the update of Apache Homepage based on env, name and page_text variables
+# This workflow requeires the following secrets:
+# - GITHUB TOKEN
+# This workflow requeires the following variables:
+# - ENV: DEV, STG, PRD
+# - NAME - name of author
+# - PAGE_TEXT - plain text
+
+on: workflow_cal
+
+  
