@@ -11,6 +11,6 @@ jobs:
     uses: ./.github/workflows/github-tmpl-update-apache-homepage.yml
     with:
       environment: development
-      name: Vlad_Bars
-      page_text: Test github actions
+      name: vasya
+      page_text: Hello from reusable workflow
         
