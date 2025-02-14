@@ -19,6 +19,13 @@ on:
         required: true
 
   workflow_dispatch: 
+    inputs:
+      evn:
+        type: choice
+        options: 
+          - dev
+          - stg
+          - prd
 
 jobs:
   validate_inputs:
