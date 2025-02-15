@@ -12,6 +12,6 @@ jobs:
     uses: ./.github/workflows/github-tmpl-update-apache-homepage.yml
     with:
       environment: development
-      name: vasya
-      page_text: hi
+      name: ""
+      page_text: ""
         
