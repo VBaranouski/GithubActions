@@ -29,3 +29,19 @@ on:
       page_text: 
         type: string
         default: Привет из шаблона пайплайна
+
+
+jobs:
+  Set_Varaibles:
+    runs-on: ubuntu-latest
+    outputs: 
+      ENVIRONMENT: ${{ steps.set-vars.outputs.ENVIRONMENT }}
+      NAME: ${{ steps.set-vars.outputs.NAME }}
+      PAGE_TEXT: ${{ steps.set-vars.outputs.PAGE_TEXT }}
+    steps:
+      - name: prepare variables for the next job
+        id: set-vars
+        run: |
+          echo "ENVIRONMENT=${{ inputs.environment }}" >> $GITHUB_OUTPUT
+          echo "NAME=${{ inputs.name }}" >> $GITHUB_OUTPUT
+          echo "PAGE_TEXT=${{ inputs.page_text }}" >> $GITHUB_OUTPUT
