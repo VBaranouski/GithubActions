@@ -1,0 +1,31 @@
+name: Reusable workflow - Update Apache Homepage
+# This workflow runs the update of Apache Homepage based on env, name and page_text variables
+# This workflow requeires the following variables:
+# - environment: development, stage, prod
+# - name - name of author
+# - page_text - plain text
+
+on: 
+  workflow_call:
+    inputs:            # Variables For Automatic Run
+      environment:
+        type: string
+      name: 
+        type: string
+      page_text: 
+        type: string
+
+  workflow_dispatch: 
+    inputs:            # Variables For Manual Run
+      environment:     
+        type: choice
+        options: 
+          - development
+          - staging
+          - prod
+      name:
+        type: string
+        default: Vlad
+      page_text: 
+        type: string
+        default: Привет из шаблона пайплайна
