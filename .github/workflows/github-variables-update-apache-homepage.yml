@@ -32,7 +32,7 @@ on:
 
 
 jobs:
-  Set_Varaibles:
+  set_varaibles:
     runs-on: ubuntu-latest
     outputs: 
       ENVIRONMENT: ${{ steps.set-vars.outputs.ENVIRONMENT }}
