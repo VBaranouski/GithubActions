@@ -11,7 +11,7 @@ jobs:
   Update-Homepage:
     uses: ./.github/workflows/github-tmpl-update-apache-homepage.yml
     with:
-      environment: prod
+      environment: Prod
       name: ""
       page_text: ""
         
