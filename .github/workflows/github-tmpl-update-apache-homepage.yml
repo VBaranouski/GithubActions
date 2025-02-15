@@ -52,14 +52,14 @@ jobs:
 # вот тут надо подумать....
       - name: Validate Name Variable
         run: |
-             if [[ -z "${{ inputs.name }}" ]]; then
-                NAME="Default_Name_auto"
+             if [[ -z "${{ env.NAME }}" ]]; then
+                $env.NAME="Default_Name_auto"
              fi
  # вот тут надо подумать....     
       - name: Validate Page Text Variable
         run: |
-          if [[ -z "${{ inputs.page_text }}" ]]; then
-            $inputs.page_text="Default_Page_Text_auto"
+          if [[ -z "${{ env.PAGE_TEXT }}" ]]; then
+            $env.PAGE_TEXT="Default_Page_Text_auto"
           fi
 
   create_homepage: 
