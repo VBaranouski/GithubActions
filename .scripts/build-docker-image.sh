@@ -10,14 +10,13 @@ docker --version || { echo "Docker is not installed"; exit 1; }
 systemctl is-active --quiet docker || { echo "Docker is not running"; exit 1; }
 
 # Check running container
-# If container is runnin, do stop then remove it. Then remove the docker image
+# If container is running, do stop then remove it. Then remove the docker image
 
 docker ps -q --filter "name=$DOCKER_CONTAINER" | grep -q . && docker stop "$DOCKER_CONTAINER"
 docker rm -f "$DOCKER_CONTAINER"
 docker rmi -f "$DOCKER_IMAGE" || echo "No image to remove"
 
-# Create Docker image with 
-# cd "$REPO_DIR" && 
+# Create Docker image
 docker build -t "$DOCKER_IMAGE" .
 
 # Run the docker container
