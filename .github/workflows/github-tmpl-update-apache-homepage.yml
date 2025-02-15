@@ -75,7 +75,7 @@ jobs:
           run: |
             shopt -s nocasematch 
              if [[ "${{ inputs.environment }}" == "prod" ]]; then
-               echo " ERROR is ${{ inputs.environment }}. Stopping the pipline "
+               echo " Environment is ${{ inputs.environment }}. Stopping the pipline "
                exit 1
              fi
             shopt -u nocasematch
