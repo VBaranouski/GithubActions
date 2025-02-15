@@ -32,28 +32,57 @@ on:
         
 
 jobs:
+  set_variables:
+    runs-on: ubuntu-latest
+    outputs: 
+      ENVIRONMENT: ${{ steps.set-vars.outputs.ENVIRONMENT }}
+      NAME: ${{ steps.set-vars.outputs.NAME }}
+      PAGE_TEXT: ${{ steps.set-vars.outputs.PAGE_TEXT }}
+    steps:
+      - name: prepare variables for the next job
+        id: set-vars
+        run: |
+          echo "ENVIRONMENT=${{ inputs.environment }}" >> $GITHUB_OUTPUT
+          echo "NAME=${{ inputs.name }}" >> $GITHUB_OUTPUT
+          echo "PAGE_TEXT=${{ inputs.page_text }}" >> $GITHUB_OUTPUT
+  
+  
   validate_inputs:
     runs-on: ubuntu-latest
+    needs:  set_variables
+    outputs: 
+      NAME: ${{ steps.set-default-vars.outputs.NAME }}
+      PAGE_TEXT: ${{ steps.set-default-vars.outputs.PAGE_TEXT }}
     steps:
-      - name: Validate Environment Variable
+      - name: Validate And Set Environment Variable
         run: |
-             if [[ -z "${{ inputs.environment }}" ]]; then
+             if [[ -z "${{ steps.set-vars.outputs.ENVIRONMENT }}" ]]; then
                echo " ERROR: Environment is not defined"
                exit 1
              fi
-
-# вот тут надо подумать....
+             
       - name: Validate Name Variable
+        id: validate-or-set-default-name
         run: |
-             if [[ -z "${{ inputs.name }}" ]]; then
+             if [[ -z "${{ steps.set-vars.outputs.NAME }}" ]]; then
                 NAME="Default_Name_auto"
              fi
- # вот тут надо подумать....     
+ 
       - name: Validate Page Text Variable
+        id: validate-or-set-default-page-text
         run: |
-          if [[ -z "${{ inputs.page_text }}" ]]; then
+          if [[ -z "${{ steps.set-vars.outputs.PAGE_TEXT }}" ]]; then
             $inputs.page_text="Default_Page_Text_auto"
           fi
+
+       
+      - name: prepare variables for the next job
+        id: set-default-vars
+        run: |
+          echo "NAME=${{ steps.set-vars.outputs.NAME }}" >> $GITHUB_OUTPUT
+          echo "PAGE_TEXT=${{ steps.set-vars.outputs.PAGE_TEXT }}" >> $GITHUB_OUTPUT
+
+
 
   create_homepage: 
     runs-on: ubuntu-latest
