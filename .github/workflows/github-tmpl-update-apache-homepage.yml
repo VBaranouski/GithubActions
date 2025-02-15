@@ -31,7 +31,6 @@ on:
         default: Привет из шаблона пайплайна
         
 env:
-  ENVIRONMENT: "${{ inputs.environment }}" 
   NAME: "${{ inputs.name }}"
   PAGE_TEXT: "${{ inputs.page_text }}"
 
@@ -39,12 +38,10 @@ env:
 jobs:
   validate_inputs:
     runs-on: ubuntu-latest
-    
-        
     steps:
       - name: Validate Environment Variable
         run: |
-             if [[ -z "${{ env.ENVIRONMENT }}" ]]; then
+             if [[ -z "${{ inputs.environment }}" ]]; then
                echo " ERROR: Environment is not defined"
                exit 1
              fi
@@ -73,18 +70,25 @@ jobs:
 
         - name: Run Unit tests
           run: echo "do some unit testing"
+
+        - name: Check if the environment is Prod
+          run: |
+             if [[ "${{ inputs.environment }}" == "Prod" ]]; then
+               echo " ERROR is ${{ inputs.environment }}. Stopping the pipline "
+               exit 1
+             fi
           
         - name: Update Apache Homepage
-          continue-on-error: false
+          if: success()
           run: |
                 echo "${{ inputs.environment }}, ${{ inputs.name }}, ${{ inputs.page_text }}" > "${{ env.HTML_FILE }}"
                 cat "${{ env.HTML_FILE }}"
 
         - name: Call Script For Pushing To "${{ github.repository }}"
+          continue-on-error: true
           run: bash .scripts/push-to-repo.sh
 
         - name: Deploy Docker Image
-          continue-on-error: true
           run: bash .scripts/build-docker-image.sh
         
   
