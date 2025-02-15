@@ -1,0 +1,85 @@
+
+
+name: TMP Reusable workflow - Update Apache Homepage
+# This workflow runs the update of Apache Homepage based on env, name and page_text variables
+# This workflow requeires the following variables:
+# - environment: development, stage, prod
+# - name - name of author
+# - page_text - plain text
+
+on: 
+  workflow_call:
+    inputs:            # Variables For Automatic Run
+      environment:
+        type: string
+      name: 
+        type: string
+      page_text: 
+        type: string
+
+  workflow_dispatch: 
+    inputs:            # Variables For Manual Run
+      environment:     
+        type: choice
+        options: 
+          - development
+          - staging
+          - prod
+      name:
+        type: string
+        default: Vlad
+      page_text: 
+        type: string
+        default: Привет из шаблона пайплайна
+        
+
+jobs:
+  validate_inputs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate Environment Variable
+        run: |
+             if [[ -z "${{ inputs.environment }}" ]]; then
+               echo " ERROR: Environment is not defined"
+               exit 1
+             fi
+
+# вот тут надо подумать....
+      - name: Validate Name Variable
+        run: |
+             if [[ -z "${{ inputs.name }}" ]]; then
+                NAME="Default_Name_auto"
+             fi
+ # вот тут надо подумать....     
+      - name: Validate Page Text Variable
+        run: |
+          if [[ -z "${{ inputs.page_text }}" ]]; then
+            $inputs.page_text="Default_Page_Text_auto"
+          fi
+
+  create_homepage: 
+    runs-on: ubuntu-latest
+    needs: validate_inputs
+    env:
+      HTML_FILE: "ApacheHomepage.html"
+    steps:
+        - name: Clone Repository "${{ github.repository }}"
+          uses: actions/checkout@v4
+
+        - name: Run Unit tests
+          run: echo "do some unit testing"
+          
+        - name: Update Apache Homepage
+          continue-on-error: false
+          run: |
+                echo "${{ inputs.environment }}, ${{ inputs.name }}, ${{ inputs.page_text }}" > "${{ env.HTML_FILE }}"
+                cat "${{ env.HTML_FILE }}"
+
+        - name: Call Script For Pushing To "${{ github.repository }}"
+          run: bash .scripts/push-to-repo.sh
+
+        - name: Deploy Docker Image
+          continue-on-error: true
+          run: bash .scripts/build-docker-image.sh
+        
+  
