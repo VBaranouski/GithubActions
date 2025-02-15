@@ -30,14 +30,21 @@ on:
         type: string
         default: Привет из шаблона пайплайна
         
+env:
+  ENVIRONMENT: "${{ inputs.environment }}" 
+  NAME: "${{ inputs.name }}"
+  PAGE_TEXT: "${{ inputs.page_text }}"
+
 
 jobs:
   validate_inputs:
     runs-on: ubuntu-latest
+    
+        
     steps:
       - name: Validate Environment Variable
         run: |
-             if [[ -z "${{ inputs.environment }}" ]]; then
+             if [[ -z "$env.ENVIRONMENT" ]]; then
                echo " ERROR: Environment is not defined"
                exit 1
              fi
