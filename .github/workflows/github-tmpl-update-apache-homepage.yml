@@ -73,10 +73,12 @@ jobs:
 
         - name: Check if the environment is Prod
           run: |
-             if [[ "${{ inputs.environment,, }}" == "prod" ]]; then
+            shopt -s nocasematch 
+             if [[ "${{ inputs.environment }}" == "prod" ]]; then
                echo " ERROR is ${{ inputs.environment }}. Stopping the pipline "
                exit 1
              fi
+            shopt -u nocasematch
           
         - name: Update Apache Homepage
           if: success()
