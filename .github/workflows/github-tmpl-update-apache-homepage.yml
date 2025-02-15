@@ -1,6 +1,4 @@
-
-
-name: TMP Reusable workflow - Update Apache Homepage
+name: Reusable workflow - Update Apache Homepage
 # This workflow runs the update of Apache Homepage based on env, name and page_text variables
 # This workflow requeires the following variables:
 # - environment: development, stage, prod
