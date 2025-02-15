@@ -5,13 +5,13 @@ name: Main CI File
 # If name or page_text are not provided, default values is assigned.
 
 # When manually triggered:
-#	1.	The environment is selected from: development, stage, prod.
-#	2.	The name field is a text input with a default value of "Vlad".
-#	3.	The page_text field is a text input with a default value of "Привет из шаблона пайплайна".
+#	1. The environment is selected from: development, stage, prod.
+#	2. The name field is a text input with a default value of "Vlad".
+#	3. The page_text field is a text input with a default value of "Привет из шаблона пайплайна".
 
 # The main pipeline should be triggered based on the following conditions:
-#	•	A push to the main branch
-#	•	A MergeRequest event
+#	• A push to the main branch
+#	• A MergeRequest event
 
 # The main pipeline should trigger the template workflow with the following parameters:
 # environment: "dev"  
@@ -21,8 +21,8 @@ name: Main CI File
 # The values of these variables should be inserted into the Apache homepage, which is generated dynamically.
 
 # This step should only be triggered if:
-#	•	The fake unit tests (a separate pipeline step) pass successfully.
-#	•	The environment is not "prod".
+#	• The fake unit tests (a separate pipeline step) pass successfully.
+#	• The environment is not "prod".
 
 on:
   push:
