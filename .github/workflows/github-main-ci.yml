@@ -1,3 +1,4 @@
+name: Main CI File
 # github-tmpl-update-apache-homepage pipeline template, accept the following input parameters: environment, page_text, and name.
 # This template is triggered both from another pipeline and manually from the UI.
 # The template validates the input parameters, and if the environment value is not provided, it stops execution with a specific error message.
@@ -22,11 +23,6 @@
 # This step should only be triggered if:
 #	•	The fake unit tests (a separate pipeline step) pass successfully.
 #	•	The environment is not "prod".
-
-
-
-
-name: Main CI File
 
 on:
   push:
