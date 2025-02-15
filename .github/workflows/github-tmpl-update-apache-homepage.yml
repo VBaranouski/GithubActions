@@ -66,7 +66,6 @@ jobs:
         if: success() # 'Run Unit tests' and 'Verify Environment variable' steps are passed
         run: |
           echo "${{ inputs.environment }}, ${{ env.NAME }}, ${{ env.PAGE_TEXT }}" > "${{ env.HTML_FILE }}"
-          cat "${{ env.HTML_FILE }}"
 
      # Push new changes to git repository
       - name: Call Script For Pushing To "${{ github.repository }}"
