@@ -13,5 +13,5 @@ jobs:
     with:
       environment: development
       name: vasya
-      page_text: ""
+      page_text: hi
         
