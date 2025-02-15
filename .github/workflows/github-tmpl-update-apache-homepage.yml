@@ -29,68 +29,47 @@ on:
       page_text: 
         type: string
         default: Привет из шаблона пайплайна
-        
-env:
-  NAME: "${{ inputs.name }}"
-  PAGE_TEXT: "${{ inputs.page_text }}"
-
 
 jobs:
-  validate_inputs:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Validate Environment Variable
-        run: |
-             if [[ -z "${{ inputs.environment }}" ]]; then
-               echo " ERROR: Environment is not defined"
-               exit 1
-             fi
-
-# вот тут надо подумать....
-      - name: Validate Name Variable
-        run: |
-             if [[ -z "${{ env.NAME }}" ]]; then
-                echo "NAME=Default_Name_auto" >> $GITHUB_ENV
-             fi
- # вот тут надо подумать....     
-      - name: Validate Page Text Variable
-        run: |
-          if [[ -z "${{ env.PAGE_TEXT }}" ]]; then
-            echo "PAGE_TEXT=Default_Page_Text_auto" >> $GITHUB_ENV
-          fi
 
   create_homepage: 
     runs-on: ubuntu-latest
-    needs: validate_inputs
     env:
       HTML_FILE: "ApacheHomepage.html"
+      NAME: ${{ inputs.name || vars.DEFAULT_NAME }}
+      PAGE_TEXT: ${{ inputs.page_text || vars.DEFAULT_PAGE_TEXT }}
+   
     steps:
-        - name: Clone Repository "${{ github.repository }}"
-          uses: actions/checkout@v4
+      - name: Clone Repository "${{ github.repository }}"
+        uses: actions/checkout@v4
 
-        - name: Run Unit tests
-          run: echo "do some unit testing"
+      - name: Run Unit tests
+        run: echo "do some unit testing"
 
-        - name: Check if the environment is Prod
-          run: |
-            shopt -s nocasematch 
-             if [[ "${{ inputs.environment }}" == "prod" ]]; then
-               echo " Environment is ${{ inputs.environment }}. Stopping the pipline "
+      - name: Check if the environment is Prod
+        run: |
+          shopt -s nocasematch 
+          if [[ -z "${{ inputs.environment }}" ]]; then
+               echo " ERROR: Environment is not defined"
                exit 1
              fi
-            shopt -u nocasematch
+          if [[ "${{ inputs.environment }}" == "prod" ]]; then
+            echo " Environment is ${{ inputs.environment }}. Stopping the pipeline."
+            exit 1
+          fi
+          shopt -u nocasematch
           
-        - name: Update Apache Homepage
-          if: success()
-          run: |
-                echo "${{ inputs.environment }}, ${{ inputs.name }}, ${{ inputs.page_text }}" > "${{ env.HTML_FILE }}"
-                cat "${{ env.HTML_FILE }}"
+      - name: Update Apache Homepage
+        if: success()
+        run: |
+          echo "${{ inputs.environment }}, ${{ env.NAME }}, ${{ env.PAGE_TEXT }}" > "${{ env.HTML_FILE }}"
+          cat "${{ env.HTML_FILE }}"
 
-        - name: Call Script For Pushing To "${{ github.repository }}"
-          continue-on-error: true
-          run: bash .scripts/push-to-repo.sh
+      - name: Call Script For Pushing To "${{ github.repository }}"
+        continue-on-error: true
+        run: bash .scripts/push-to-repo.sh
 
-        - name: Deploy Docker Image
-          run: bash .scripts/build-docker-image.sh
+      - name: Deploy Docker Image
+        run: bash .scripts/build-docker-image.sh
         
   
