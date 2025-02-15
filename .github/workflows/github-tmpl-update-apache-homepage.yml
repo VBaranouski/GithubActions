@@ -73,7 +73,7 @@ jobs:
 
         - name: Check if the environment is Prod
           run: |
-             if [[ "${{ inputs.environment }}" == "Prod" ]]; then
+             if [[ "${{ inputs.environment,, }}" == "prod" ]]; then
                echo " ERROR is ${{ inputs.environment }}. Stopping the pipline "
                exit 1
              fi
