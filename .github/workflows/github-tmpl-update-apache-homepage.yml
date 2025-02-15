@@ -44,7 +44,7 @@ jobs:
     steps:
       - name: Validate Environment Variable
         run: |
-             if [[ -z "$env.ENVIRONMENT" ]]; then
+             if [[ -z "${{ env.ENVIRONMENT }}" ]]; then
                echo " ERROR: Environment is not defined"
                exit 1
              fi
