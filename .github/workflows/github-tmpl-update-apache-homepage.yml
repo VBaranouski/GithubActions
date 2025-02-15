@@ -53,13 +53,13 @@ jobs:
       - name: Validate Name Variable
         run: |
              if [[ -z "${{ env.NAME }}" ]]; then
-                $env.NAME="Default_Name_auto"
+                echo "NAME=Default_Name_auto" >> $GITHUB_ENV
              fi
  # вот тут надо подумать....     
       - name: Validate Page Text Variable
         run: |
           if [[ -z "${{ env.PAGE_TEXT }}" ]]; then
-            $env.PAGE_TEXT="Default_Page_Text_auto"
+            echo "PAGE_TEXT=Default_Page_Text_auto" >> $GITHUB_ENV
           fi
 
   create_homepage: 
