@@ -54,7 +54,7 @@ jobs:
           if [[ -z "${{ inputs.environment }}" ]]; then
                echo " ERROR: Environment is not defined"
                exit 1
-             fi
+          fi
           if [[ "${{ inputs.environment }}" == "prod" ]]; then
             echo " Environment is ${{ inputs.environment }}. Stopping the pipeline."
             exit 1
