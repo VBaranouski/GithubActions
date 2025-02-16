@@ -37,17 +37,17 @@ jobs:
       HTML_FILE: "ApacheHomepage.html"
       NAME: ${{ inputs.name || vars.DEFAULT_NAME }} # If inputs.name is provided, it will be used. Otherwise, vars.DEFAULT_NAME will be used 
       PAGE_TEXT: ${{ inputs.page_text || vars.DEFAULT_PAGE_TEXT }} # If inputs.page_text is provided, it will be used. Otherwise, vars.DEFAULT_PAGE_TEXT will be used
-
-   # Clone repository
+    
     steps: 
+    # 1. Clone repository
       - name: Clone Repository "${{ github.repository }}"
         uses: actions/checkout@v4
 
-   # Run unit tests
+    # 2. Run unit tests
       - name: Run Unit tests
         run: echo "do some unit testing"
 
-   # Verify Environment parameters not to be empty, or Prod. 
+    # 3. Verify Environment parameters not to be empty, or Prod. 
       - name: Verify Environment variable
         run: |
           shopt -s nocasematch 
@@ -61,18 +61,17 @@ jobs:
           fi
           shopt -u nocasematch
 
-    # Build a new Homepage with input parameters
+    # 4. Build a new Homepage with input parameters
       - name: Update Apache Homepage
-        if: success() # 'Run Unit tests' and 'Verify Environment variable' steps are passed
         run: |
           echo "${{ inputs.environment }}, ${{ env.NAME }}, ${{ env.PAGE_TEXT }}" > "${{ env.HTML_FILE }}"
 
-     # Push new changes to git repository
+     # 5. Push new changes to git repository
       - name: Call Script For Pushing To "${{ github.repository }}"
         continue-on-error: true
         run: bash .scripts/push-to-repo.sh
 
-     # Build docker image and deploy the container
+     # 6. Build docker image and deploy the container
       - name: Deploy Docker Image
         run: bash .scripts/build-docker-image.sh
         
