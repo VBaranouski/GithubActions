@@ -35,8 +35,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       HTML_FILE: "ApacheHomepage.html"
-      NAME: ${{ inputs.name || vars.DEFAULT_NAME }} # If inputs.name is provided, it will be used. Otherwise, vars.DEFAULT_NAME will be used 
-      PAGE_TEXT: ${{ inputs.page_text || vars.DEFAULT_PAGE_TEXT }} # If inputs.page_text is provided, it will be used. Otherwise, vars.DEFAULT_PAGE_TEXT will be used
+      NAME: ${{ inputs.name || vars.DEFAULT_NAME }} # If inputs.name is provided, it will be used. Otherwise, Default Name from Project Variables will be used 
+      PAGE_TEXT: ${{ inputs.page_text || vars.DEFAULT_PAGE_TEXT }} # If inputs.page_text is provided, it will be used. Otherwise, Default Page Text from Project Variables will be used
     
     steps: 
     # 1. Clone repository
