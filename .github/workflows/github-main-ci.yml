@@ -30,7 +30,7 @@ on:
      - main
   pull_request:
     types: 
-     - closed
+     - closed #triggre workflow if PR is merged. 
     branches: 
      - main
   workflow_dispatch: 
