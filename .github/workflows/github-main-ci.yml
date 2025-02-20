@@ -38,6 +38,6 @@ jobs:
     uses: ./.github/workflows/github-tmpl-update-apache-homepage.yml
     with:
       environment: development
-    #  name: "vasya"
+      name: "vasya"
       page_text: "Hello from reusable workflow"
         
